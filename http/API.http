@@ -1,0 +1,235 @@
+# 首页名片数据
+GET {{host}}/appapi/card/myInfo
+Accept: application/json
+
+###
+
+# 查询我的侧写
+GET {{host}}/appapi/card/profile
+Accept: application/json
+
+###
+
+# 修改我的侧写
+POST {{host}}/appapi/card/updateProfile
+Content-Type: application/json
+
+{
+  "id": 1314,
+  "userName": "baojieren2222",
+  "phone": "1313131313",
+  "logo": "https://imgxxxxx",
+  "companyName": "贵煤数据..",
+  "job": "挖煤工",
+  "email": "2013142083@qq.com",
+  "countryName": "demoData",
+  "countryCode": "1",
+  "provinceName": "demoData",
+  "provinceCode": "2",
+  "cityName": "demoData",
+  "cityCode": "3",
+  "addr": "贵阳太深国际",
+  "remark": "这是我的个人描述",
+  "industryList": [
+    2
+  ]
+}
+
+###
+
+# 保存别人名片
+GET {{host}}/appapi/card/getBiz?bizUserId=1313
+Accept: application/json
+
+###
+
+# 取消保存别人名片
+GET {{host}}/appapi/card/removeBiz?bizUserId=1313
+Accept: application/json
+
+###
+
+# 点赞别人名片
+GET {{host}}/appapi/card/getPraiseBiz?bizUserId=1313
+Accept: application/json
+
+###
+
+# 取消点赞别人名片
+GET {{host}}/appapi/card/removePraiseBiz?bizUserId=1313
+Accept: application/json
+
+###
+
+# 查询需求广场一级分类
+GET {{host}}/appapi/article/lv1
+Accept: application/json
+
+###
+
+# 需求广场二级菜单
+GET {{host}}/appapi/article/lv2/init?lv1Id=1
+Accept: application/json
+
+###
+
+# 发布按钮查询分类
+GET {{host}}/appapi/article/lv2/publish?lv1Id=2
+Accept: application/json
+
+###
+
+# 发布文章
+POST {{host}}/appapi/article/create
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "demandMenuId": 10,
+  "title": "文章标题",
+  "content": "文章内容文章内容文章内容文章内容文章内容文章内容文章内容",
+  "keyword": "内容",
+  "themeImage": "https://img.dfadsfsa.com"
+}
+
+###
+
+# 查询文章列表
+POST {{host}}/appapi/article/page/list
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "demandMenuId": 1
+}
+
+###
+
+# 写评论
+POST {{host}}/appapi/comment/save
+Content-Type: application/json
+
+{
+  "userId": 1111,
+  "articleId": 1,
+  "type": 2,
+  "commentId": 6,
+  "content": "回复评论"
+}
+
+###
+
+# 查询评论
+POST {{host}}/appapi/comment/list
+Content-Type: application/json
+
+{
+  "articleId": 1,
+  "pageNum": 1,
+  "pageSize": 10
+}
+
+###
+
+# 收藏
+GET {{host}}/appapi/collect/rcni?articleId=1
+Accept: application/json
+
+###
+
+# 名片数据
+GET {{host}}/appapi/user/card
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# 保存职位
+POST {{host}}/appapi/work/save
+Content-Type: application/json
+
+{
+  "workName": "挖煤工",
+  "salary": "500元/天",
+  "workAddr": "贵阳市泰森国际",
+  "experience": 1,
+  "education": 1,
+  "workDesc": "1. 力气大",
+  "companyDesc": "世界500强",
+  "welfare": "没饭吃,没午休",
+  "jobMenuId": 1,
+  "images": [
+    "https://img.gmsj.com/xxxx",
+    "https://img.gmsj.com/xxxx"
+  ]
+}
+
+###
+
+# 查询文章详情
+GET {{host}}/appapi/article/one/info?articleId=1
+Accept: application/json
+
+###
+
+#=============================招聘
+
+# 招聘二级页面
+GET {{host}}/appapi/work/jobmenu
+Accept: application/json
+
+###
+
+# 招聘二级页面搜索
+GET {{host}}/appapi/work/search?keyword=挖
+Accept: application/json
+
+###
+
+# 获取招聘二级分类列表
+GET {{host}}/appapi/work/lv2/list
+Accept: application/json
+
+###
+
+# 查询招聘列表
+POST {{host}}/appapi/work/list
+Content-Type: application/json
+
+{
+  "pageNum": 1,
+  "pageSize": 10,
+  "lv2MenuId": 1
+}
+
+###
+
+# 查询招聘信息详情
+GET {{host}}/appapi/work/one/info?workId=1
+Accept: application/json
+
+###
+
+# 获取政策资讯二级分类列表
+GET {{host}}/appapi/policy/menu/lv2
+Accept: application/json
+
+###
+
+# 用二级分类id分页查询文章列表
+
+POST {{host}}/appapi/policy/pageList
+Content-Type: application/json
+
+{
+  "pageNum": 1,
+  "pageSize": 10,
+  "menuId": 1
+}
+
+###
+
+GET {{host}}/appapi/policy/one/info?policyId=1
+Accept: application/json
+
+###

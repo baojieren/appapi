@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gmsj.dao.SearchHistoryMapper">
+
+    <select id="findHistory" resultType="com.gmsj.model.po.SearchHistoryPo">
+        select *
+        from search_history
+        where user_id = #{userId} and demand_menu_id = #{menuId}
+    </select>
+
+    <insert id="insertHistory">
+        insert into
+        search_history(user_id, demand_menu_id, content)
+        VALUES(#{userId}, #{menuId}, #{content})
+    </insert>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gmsj.dao.WorkDao">
+    <resultMap id="BaseResultMap" type="com.gmsj.model.po.WorkPo">
+        <!--@mbg.generated generated on Thu Apr 23 11:36:54 CST 2020.-->
+        <!--@Table `work`-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="company_id" jdbcType="INTEGER" property="companyId"/>
+        <result column="work_name" jdbcType="VARCHAR" property="workName"/>
+        <result column="salary" jdbcType="VARCHAR" property="salary"/>
+        <result column="work_addr" jdbcType="VARCHAR" property="workAddr"/>
+        <result column="experience" jdbcType="INTEGER" property="experience"/>
+        <result column="education" jdbcType="INTEGER" property="education"/>
+        <result column="work_desc" jdbcType="VARCHAR" property="workDesc"/>
+        <result column="company_desc" jdbcType="VARCHAR" property="companyDesc"/>
+        <result column="welfare" jdbcType="VARCHAR" property="welfare"/>
+        <result column="images" jdbcType="VARCHAR" property="images"/>
+        <result column="job_menu_id" jdbcType="INTEGER" property="jobMenuId"/>
+        <result column="browse_sum" jdbcType="INTEGER" property="browseSum"/>
+        <result column="collect_sum" jdbcType="INTEGER" property="collectSum"/>
+        <result column="valid" jdbcType="TINYINT" property="valid"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated generated on Thu Apr 23 11:36:54 CST 2020.-->
+        id, user_id, company_id, work_name, salary, work_addr, experience, education, work_desc,
+        company_desc, welfare, images, job_menu_id, browse_sum, collect_sum, `valid`, update_time,
+        create_time
+    </sql>
+    <select id="selectPageByMenuIdAndValid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from work where job_menu_id=#{menuId} and valid=#{valid}
+    </select>
+    <select id="selectFuzzyWork" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from work where concat(work_name,work_desc,company_desc,welfare) like concat('%',#{keyword},'%')
+    </select>
+</mapper>

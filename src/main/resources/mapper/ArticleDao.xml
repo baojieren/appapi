@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gmsj.dao.ArticleDao">
+    <resultMap id="BaseResultMap" type="com.gmsj.model.po.ArticlePo">
+        <!--@mbg.generated generated on Thu Apr 23 11:08:58 CST 2020.-->
+        <!--@Table article-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="keyword" jdbcType="VARCHAR" property="keyword"/>
+        <result column="theme_image" jdbcType="VARCHAR" property="themeImage"/>
+        <result column="images" jdbcType="VARCHAR" property="images"/>
+        <result column="browse_sum" jdbcType="INTEGER" property="browseSum"/>
+        <result column="comment_sum" jdbcType="INTEGER" property="commentSum"/>
+        <result column="praise_sum" jdbcType="INTEGER" property="praiseSum"/>
+        <result column="collect_sum" jdbcType="INTEGER" property="collectSum"/>
+        <result column="owner_id" jdbcType="INTEGER" property="ownerId"/>
+        <result column="demand_menu_id" jdbcType="INTEGER" property="demandMenuId"/>
+        <result column="valid" jdbcType="TINYINT" property="valid"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated generated on Thu Apr 23 11:08:58 CST 2020.-->
+        id, title, content, keyword, theme_image, images, browse_sum, comment_sum, praise_sum,
+        collect_sum, owner_id, demand_menu_id, `valid`, create_time, update_time
+    </sql>
+    <select id="selectFirstLimitByMenuId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from article where demand_menu_id=#{menuId} and valid=1 limit 10
+    </select>
+    <select id="selectPageByMenuId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from article where demand_menu_id=#{menuId} and valid=1
+    </select>
+    <select id="countBrowseSumByUserId" resultType="java.lang.Integer">
+      select sum(browse_sum) from article where owner_id=#{userId} and valid=1
+    </select>
+    <select id="selectFuzzyArticle" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from article where concat(title,content,keyword) like concat('%',#{keyword},'%') and valid=1
+    </select>
+    
+    <select id="selectByOwnerId" parameterType="integer" resultType="com.gmsj.model.po.ArticlePo">
+        select
+        <include refid="Base_Column_List"/>
+        from article where owner_id = #{userId} and valid=1
+    </select>
+
+    <select id="selectById" parameterType="integer" resultType="com.gmsj.model.po.ArticlePo">
+        select
+        <include refid="Base_Column_List"/>
+        from article where id = #{articleId}
+    </select>
+</mapper>
