@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+    <springProperty scope="context" name="appVersion" source="spring.application.app-version"/>
     <!-- 文件输出格式 -->
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) %-5level--- [%t] %-40.40logger{39} %-4L: %msg%n" />
     <!-- 开发环境 -->
@@ -19,7 +21,7 @@
             <!-- 文件路径 -->
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!-- 文件名称 -->
-                <fileNamePattern>/opt/logs/appapi/appapi.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <fileNamePattern>/opt/logs/${appName}/${appName}.%d{yyyy-MM-dd}.log</fileNamePattern>
                 <!-- 文件最大保存历史数量 -->
                 <MaxHistory>360</MaxHistory>
             </rollingPolicy>
@@ -39,7 +41,7 @@
             <!-- 文件路径 -->
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!-- 文件名称 -->
-                <fileNamePattern>/opt/logs/appapi/appapi.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <fileNamePattern>/opt/logs/${appName}/${appName}.%d{yyyy-MM-dd}.log</fileNamePattern>
                 <!-- 文件最大保存历史数量 -->
                 <MaxHistory>360</MaxHistory>
             </rollingPolicy>
